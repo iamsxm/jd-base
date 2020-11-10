@@ -48,11 +48,11 @@ echo
 
 ################################## 更新JS脚本 ##################################
 function Git_PullScripts {
-  echo "更新JS脚本暂停，因为js主库已封，原地址：${ScriptsURL}"
+  echo "更新JS脚本，原地址：${ScriptsURL}"
   echo
-#  git fetch --all
-#  git reset --hard origin/master
-#  git pull
+  git fetch --all
+  git reset --hard origin/master
+  git pull
 }
 
 
@@ -543,7 +543,7 @@ fi
   
 
 ################################## 自动删除失效的脚本与定时任务 ##################################
-## 如果检测到某个定时任务在https://github.com/lxk0301/scripts中已删除，那么在本地也删除对应的shell脚本与定时任务
+## 如果检测到某个定时任务在https://github.com/lxk0301/jd_scripts中已删除，那么在本地也删除对应的shell脚本与定时任务
 ## 此功能仅在 AutoDelCron 设置为 true 时生效
 if [ ${GitPullExitStatus} -eq 0 ] && [ "${AutoDelCron}" = "true" ] && [ -s ${ListJsDrop} ]; then
   echo "开始尝试自动删除定时任务如下："
@@ -565,7 +565,7 @@ fi
 
 
 ################################## 自动增加新的定时任务 ##################################
-## 如果检测到https://github.com/lxk0301/scripts中增加新的Guthub Action定时任务，那么在本地也增加
+## 如果检测到https://github.com/lxk0301/jd_scripts中增加新的Guthub Action定时任务，那么在本地也增加
 ## 此功能仅在 AutoAddCron 设置为 true 时生效
 ## 本功能生效时，会自动从 scripts/.github/workflows 文件夹新增加的 .yml 文件中读取 cron 这一行的任务时间，
 ## 但因为Github Action定时任务采用的是UTC时间，比北京时间晚8小时，所以会导致本地任务无法真正地在准确设定的时间运行，需要手动修改crontab
